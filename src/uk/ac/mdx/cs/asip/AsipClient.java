@@ -119,9 +119,9 @@ public class AsipClient {
 	// processPortData and processPinMapping for additional details
 	// on the actual mapping.
 	public void requestPortMapping() {
-		out.write(IO_SERVICE+","+PORT_MAPPING);
+		out.write(IO_SERVICE+","+PORT_MAPPING+"\n");
 		if (DEBUG) {
-			System.out.println("DEBUG: Requesting port mapping with "+IO_SERVICE+","+PORT_MAPPING);
+			System.out.println("DEBUG: Requesting port mapping with "+IO_SERVICE+","+PORT_MAPPING+"\n");
 		}
 	}
     
@@ -136,7 +136,7 @@ public class AsipClient {
 	}
 	
 	public void setPinMode(int pin, int mode) {
-		out.write(IO_SERVICE+","+PIN_MODE+","+pin+","+mode);
+		out.write(IO_SERVICE+","+PIN_MODE+","+pin+","+mode+"\n");
 		if (DEBUG) {
 			System.out.println("DEBUG: Setting pin mode with "+IO_SERVICE+","+PIN_MODE+","+pin+","+mode);
 		}
@@ -152,7 +152,7 @@ public class AsipClient {
 	
 	// A method to write to an analog pin
 	public void analoglWrite(int pin, int value) {
-		out.write(IO_SERVICE+","+ANALOG_WRITE+","+pin+","+value);
+		out.write(IO_SERVICE+","+ANALOG_WRITE+","+pin+","+value+"\n");
 		if (DEBUG) {
 			System.out.println("DEBUG: Setting analog pin with "+IO_SERVICE+","+DIGITAL_WRITE+","+pin+","+value);
 		}
@@ -160,7 +160,7 @@ public class AsipClient {
 	
 	// A method to set the autoreport interval (in ms)
 	public void setAutoReportInterval(int interval) {
-		out.write(IO_SERVICE+","+ANALOG_DATA_REQUEST+","+interval);
+		out.write(IO_SERVICE+","+ANALOG_DATA_REQUEST+","+interval+"\n");
 		if (DEBUG) {
 			System.out.println("DEBUG: Setting autoreport interval "+IO_SERVICE+","+ANALOG_DATA_REQUEST+","+interval);
 		}
