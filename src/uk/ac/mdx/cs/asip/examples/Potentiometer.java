@@ -30,12 +30,21 @@ public class Potentiometer extends SimpleSerialBoard {
 		// We could pass the port as an argument, for the moment
 		// I hard-code it because I'm lazy.
 	
-		Potentiometer testBoard = new Potentiometer("/dev/tty.usbmodem1411");
+		Potentiometer testBoard = new Potentiometer("COM3");
 		
-		testBoard.requestPortMapping();
-		testBoard.setAutoReportInterval(50);
-		testBoard.setPinMode(ledPin, AsipClient.OUTPUT);  // declare the LED pin as an output
-		testBoard.setPinMode(potPin+14, AsipClient.ANALOG);
+		try {
+			testBoard.requestPortMapping();
+			Thread.sleep(100);
+			testBoard.setAutoReportInterval(50);
+			Thread.sleep(100);						// then stop the program for some time
+			testBoard.setPinMode(ledPin, AsipClient.OUTPUT);  // declare the LED pin as an output
+			Thread.sleep(100);
+			testBoard.setPinMode(potPin+14, AsipClient.ANALOG);
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}     
 		
 		// Set the LED to blink with a delay  based on the current value of the potentiometer
 		while (true) {
