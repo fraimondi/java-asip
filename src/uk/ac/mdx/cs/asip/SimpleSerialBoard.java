@@ -51,6 +51,12 @@ public class SimpleSerialBoard {
 
 		try {
 			Thread.sleep(1500);
+			requestPortMapping();
+			Thread.sleep(500);
+			requestPortMapping();
+			Thread.sleep(500);
+			requestPortMapping();
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
