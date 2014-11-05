@@ -43,8 +43,6 @@ public class SimpleSerialBoard {
 			int mask = SerialPort.MASK_RXCHAR ; //+ SerialPort.MASK_CTS
 					// + SerialPort.MASK_DSR;// Prepare mask
 			serialPort.setEventsMask(mask);// Set mask
-			serialPort.addEventListener(new SerialPortReader());// Add
-																// SerialPortEventListener
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}
@@ -57,7 +55,9 @@ public class SimpleSerialBoard {
 			Thread.sleep(500);
 			requestPortMapping();
 			Thread.sleep(500);
-		} catch (InterruptedException e) {
+			serialPort.addEventListener(new SerialPortReader());// Add
+			// SerialPortEventListener
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

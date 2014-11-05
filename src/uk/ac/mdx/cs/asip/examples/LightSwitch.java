@@ -28,7 +28,7 @@ public class LightSwitch extends SimpleSerialBoard {
 		// We could pass the port as an argument, for the moment
 		// I hard-code it because I'm lazy.
 	
-		LightSwitch testBoard = new LightSwitch("COM3");
+		LightSwitch testBoard = new LightSwitch("/dev/tty.usbmodem1411");
 		
 		testBoard.requestPortMapping();
 

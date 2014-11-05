@@ -19,7 +19,7 @@ public class SimpleBlink extends SimpleSerialBoard {
 		// We could pass the port as an argument, for the moment
 		// I hard-code it because I'm lazy.
 		
-		SimpleBlink testBoard = new SimpleBlink("COM3");
+		SimpleBlink testBoard = new SimpleBlink("/dev/tty.usbmodem1411");
 		
 		try {
 			Thread.sleep(1000);

@@ -109,8 +109,10 @@ public class AsipClient {
 
 			default:
 				// FIXME: better error handling required!
-				System.out.println("Strange character received at position 0: "
-						+ input);
+				if ( DEBUG ) {
+					System.out.println("Strange character received at position 0: "
+							+ input);
+				}
 			}
 		}
 	}
@@ -219,15 +221,22 @@ public class AsipClient {
 					System.out.println("DEBUG: received message "+input);
 				}				
 				// This is a list of strings "pin1:value1","pin2:value2",...
-				String[] pinValues = input.substring(input.indexOf("{")+1,input.indexOf("}")).split(",");
-		    	for (String pinVal: pinValues ) {
-		    		int pinID = Integer.parseInt(pinVal.split(":")[0]);
-		    		int val = Integer.parseInt(pinVal.split(":")[1]);
-		    		analog_input_pins[pinID] = val;
-					if (DEBUG) {
-						System.out.println("DEBUG: setting analog pin "+pinID+" to "+val);
+				try {
+					String[] pinValues = input.substring(input.indexOf("{")+1,input.indexOf("}")).split(",");
+					for (String pinVal: pinValues ) {
+						int pinID = Integer.parseInt(pinVal.split(":")[0]);
+						int val = Integer.parseInt(pinVal.split(":")[1]);
+						analog_input_pins[pinID] = val;
+						if (DEBUG) {
+							System.out.println("DEBUG: setting analog pin "+pinID+" to "+val);
+						}
 					}
-		    	}
+				} catch (Exception e) {
+					if (DEBUG) {
+						System.out.println("DEBUG: exception while parsing analog message");
+						e.printStackTrace();
+					}
+				}
 			}	
 			else {
 				System.out.println("Service not recognised in position 3 for I/O service: " + input);
