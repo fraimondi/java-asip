@@ -51,13 +51,17 @@ public class IRService implements AsipService {
 	
 	public void processResponse(String message) {
 		// FIXME
-		// A response for a message is something like "@R,e,3,100,200,300"
+		// A response for a message is something like "“@R,e,3,{100,200,300}"
 		if (message.charAt(3) != TAG_IR_RESPONSE) {
 			// FIXME: improve error checking
 			// We have received a message but it is not an encoder reporting event
 			System.out.println("IR message received but I don't know how to process it: "+message);
 		} else {
-			this.value = Integer.parseInt(message.split(",")[this.irID+3]);
+			
+			String[] iRValues = message.substring(message.indexOf("{")+1,
+					message.indexOf("}")).split(",");
+			
+			this.value = Integer.parseInt(iRValues[this.irID]);
 		}
 	}
 	

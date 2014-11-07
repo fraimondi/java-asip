@@ -17,6 +17,8 @@ public class EncoderService implements AsipService {
 	private int count; // Count for the encoder
 	private int pulse; // Pulse for the encoder
 	
+	private boolean DEBUG = true;
+	
 	public EncoderService(int id, AsipClient c) {
 		this.encoderID =id;
 		this.asip = c;
@@ -51,14 +53,26 @@ public class EncoderService implements AsipService {
 	
 	public void processResponse(String message) {
 		// FIXME
-		// A response for a message is something like "@E,e,2,3000,110,3100,120"
+		// A response for a message is something like "“@E,e,2,{3000:110,3100:120}"
+		if (DEBUG) {
+			System.out.println("Encoder service, received: "+message);
+		}
 		if (message.charAt(3) != TAG_ENCODER_RESPONSE) {
 			// FIXME: improve error checking
 			// We have received a message but it is not an encoder reporting event
 			System.out.println("Encoder message received but I don't know how to process it: "+message);
 		} else {
-			this.count += Integer.parseInt(message.split(",")[2*(this.encoderID+2)]);
-			this.pulse = Integer.parseInt(message.split(",")[2*(this.encoderID+1)+1]);
+			
+			String[] encValues = message.substring(message.indexOf("{")+1,
+								message.indexOf("}")).split(",");
+			int p = Integer.parseInt(encValues[this.encoderID].split(":")[0]);
+			int c = Integer.parseInt(encValues[this.encoderID].split(":")[1]);
+			
+			this.count += p;
+			this.pulse = c;
+			if (DEBUG) {
+				System.out.println("Setting count and pulse to: "+p+" "+c+" "+this.count);
+			}
 		}
 	}
 	

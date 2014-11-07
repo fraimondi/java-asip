@@ -50,14 +50,17 @@ public class BumpService implements AsipService {
 	}
 	
 	public void processResponse(String message) {
-		// FIXME
-		// A response for a message is something like "@B,e,2,0,1"
+
+		// A response for a message is something like "@B,e,2,{0,1}"
 		if (message.charAt(3) != TAG_BUMP_RESPONSE) {
 			// FIXME: improve error checking
 			// We have received a message but it is not an encoder reporting event
 			System.out.println("Bump message received but I don't know how to process it: "+message);
 		} else {
-			this.pressed = ( (Integer.parseInt(message.split(",")[this.bumpID+3]) == 1) ? false : true);
+			String[] bumpValues = message.substring(message.indexOf("{")+1,
+													message.indexOf("}")).split(",");
+
+			this.pressed = ( (Integer.parseInt(bumpValues[this.bumpID]) == 1) ? false : true);
 		}
 	}
 	

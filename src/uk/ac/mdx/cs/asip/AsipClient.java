@@ -29,6 +29,10 @@ public class AsipClient {
 	private final char PORT_DATA     	= 'd'; // i/o event from Arduino is digital port data
 	private final char ANALOG_VALUE  	= 'a'; // i/o event from Arduino is value of analog pin
 	private final char PORT_MAPPING		= 'M'; // i/o event from Arduino is port mapping to pins
+	private final char GET_PIN_MODES           = 'p'; // gets a list of pin modes
+	private final char GET_PIN_SERVICES_LIST   = 's'; // gets a list of pins indicating registered service 
+	//const char tag_GET_SERVICES_NAMES    = 'n'; // gets a list of service tags/name pairs 
+	private final char GET_PIN_CAPABILITIES    = 'c'; // gets a bitfield array indicating pin capabilities
 
 	// Pin modes (these are public)
     public static final int INPUT  			=	1; 	// defined in Arduino.h
@@ -238,8 +242,11 @@ public class AsipClient {
 					}
 				}
 			}	
+			// TODO: implement missing messages!
 			else {
-				System.out.println("Service not recognised in position 3 for I/O service: " + input);
+				if (DEBUG) {
+					System.out.println("Service not recognised in position 3 for I/O service: " + input);
+				}
 			}			
    		} // end of IO_SERVICE
    

@@ -45,15 +45,16 @@ public class JMirtoRobot {
 			int mask = SerialPort.MASK_RXCHAR + SerialPort.MASK_CTS
 					+ SerialPort.MASK_DSR;// Prepare mask
 			serialPort.setEventsMask(mask);// Set mask
-			serialPort.addEventListener(new SerialPortReader());// Add
-																// SerialPortEventListener
+
 		} catch (SerialPortException ex) {
 			System.out.println(ex);
 		}
 
 		try {
 			Thread.sleep(1500);
-		} catch (InterruptedException e) {
+			serialPort.addEventListener(new SerialPortReader());// Add
+				// SerialPortEventListener
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -234,7 +235,7 @@ public class JMirtoRobot {
 	// A main method for testing
 	public static void main(String[] args) {
 		
-		JMirtoRobot robot = new JMirtoRobot("/dev/tty.usbmodem1411");
+		JMirtoRobot robot = new JMirtoRobot("/dev/tty.usbserial-A903VH1D");
 //		JMirtoRobot robot = new JMirtoRobot("/dev/ttyAMA0");
 
 		
@@ -247,11 +248,17 @@ public class JMirtoRobot {
 				System.out.println("Encoders: "+robot.getCount(0) + ","+robot.getCount(1));
 				System.out.println("Bumpers: "+robot.isPressed(0) + ","+robot.isPressed(1));
 				System.out.println("Setting motors to 50,50");
-				robot.setMotors(250, 250);
+				robot.setMotors(50, -50);
 				Thread.sleep(1500);
 				System.out.println("Stopping motors");
 				robot.stopMotors();
+				Thread.sleep(500);
+				System.out.println("Setting motors to 100,100");
+				robot.setMotors(100,-100);
 				Thread.sleep(1500);
+				System.out.println("Stopping motors");
+				robot.stopMotors();
+				Thread.sleep(500);
 			}
 /*			System.out.println("Setting motors to 50,50");
 			robot.setMotors(50, 50);
