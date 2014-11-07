@@ -68,10 +68,10 @@ public class EncoderService implements AsipService {
 			int p = Integer.parseInt(encValues[this.encoderID].split(":")[0]);
 			int c = Integer.parseInt(encValues[this.encoderID].split(":")[1]);
 			
-			this.count += p;
-			this.pulse = c;
+			this.count += c;
+			this.pulse = p;
 			if (DEBUG) {
-				System.out.println("Setting count and pulse to: "+p+" "+c+" "+this.count);
+				System.out.println("Setting count and pulse to: "+c+" "+p+" "+this.count);
 			}
 		}
 	}

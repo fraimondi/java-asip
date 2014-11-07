@@ -47,11 +47,11 @@ public class MotorService implements AsipService {
 	
 	public void setMotor(int speed) {
 		// Speed should be between -100 and +100
-		if (speed > 100 ) {
-			speed = 100;
+		if (speed > 255 ) {
+			speed = 255;
 		}
-		if (speed < -100 ) {
-			speed = -100;
+		if (speed < -255 ) {
+			speed = -255;
 		}
 		System.out.println("Setting motor "+this.motorID+" to "+speed+"...");
 		asip.getAsipWriter().write(serviceID+"," 

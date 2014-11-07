@@ -248,13 +248,13 @@ public class JMirtoRobot {
 				System.out.println("Encoders: "+robot.getCount(0) + ","+robot.getCount(1));
 				System.out.println("Bumpers: "+robot.isPressed(0) + ","+robot.isPressed(1));
 				System.out.println("Setting motors to 50,50");
-				robot.setMotors(50, -50);
+				robot.setMotors(100, -100);
 				Thread.sleep(1500);
 				System.out.println("Stopping motors");
 				robot.stopMotors();
 				Thread.sleep(500);
 				System.out.println("Setting motors to 100,100");
-				robot.setMotors(100,-100);
+				robot.setMotors(250,-250);
 				Thread.sleep(1500);
 				System.out.println("Stopping motors");
 				robot.stopMotors();
