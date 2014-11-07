@@ -4,6 +4,8 @@ import uk.ac.mdx.cs.asip.AsipClient;
 
 public class MotorService implements AsipService {
 
+	private boolean DEBUG =  false;
+	
 	private char serviceID = 'M';
 	
 	// A motor has a unique ID (there may be more than one motor
@@ -53,11 +55,12 @@ public class MotorService implements AsipService {
 		if (speed < -255 ) {
 			speed = -255;
 		}
-		System.out.println("Setting motor "+this.motorID+" to "+speed+"...");
+		if (DEBUG) {
+			System.out.println("Setting motor "+this.motorID+" to "+speed+"...");
+		}
 		asip.getAsipWriter().write(serviceID+"," 
 									+ TAG_SET_MOTOR_SPEED+
 									"," + this.motorID + "," + speed);
-		System.out.println("Done");
 	}
 	
 	// Stop the motor (just set speed to 0)

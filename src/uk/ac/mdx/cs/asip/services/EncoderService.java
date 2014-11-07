@@ -3,6 +3,9 @@ package uk.ac.mdx.cs.asip.services;
 import uk.ac.mdx.cs.asip.AsipClient;
 
 public class EncoderService implements AsipService {
+	
+	private boolean DEBUG = false;
+	
 	private char serviceID = 'E';
 	
 	// An encoder has a unique ID (there may be more than one encoder
@@ -16,8 +19,6 @@ public class EncoderService implements AsipService {
 
 	private int count; // Count for the encoder
 	private int pulse; // Pulse for the encoder
-	
-	private boolean DEBUG = true;
 	
 	public EncoderService(int id, AsipClient c) {
 		this.encoderID =id;
