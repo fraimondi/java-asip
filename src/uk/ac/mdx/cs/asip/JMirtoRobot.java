@@ -12,7 +12,7 @@ import jssc.SerialPortException;
 public class JMirtoRobot {
 	
 	// For debugging
-	boolean DEBUG = true;
+	boolean DEBUG = false;
 
 	// The ASIP board is normally attached to a serial port (provided by jssc)
 	SerialPort serialPort;

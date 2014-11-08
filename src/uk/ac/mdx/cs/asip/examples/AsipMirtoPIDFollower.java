@@ -148,6 +148,8 @@ public class AsipMirtoPIDFollower {
 					int middleIR = cutIR(robot.getIR(1));
 					int rightIR = cutIR(robot.getIR(0));
 				
+
+					
 					if ( (leftIR==0) && (middleIR==0) && (rightIR==0)) {
 						// This means that we lost the track. We keep doing what we
 						// were doing before.
@@ -177,7 +179,10 @@ public class AsipMirtoPIDFollower {
 					} else if (delta < (-maxDelta)) {
 						delta = (-maxDelta);
 					}
-				
+
+					System.out.println("IR: " + leftIR +" "+ middleIR+ " " +rightIR);
+					System.out.println("Delta: "+delta);
+					
 					if (delta < 0) {
 						robot.setMotors( (int) (2.55*(PWR+delta)), (int) (2.55*(-PWR)));
 					} else {
