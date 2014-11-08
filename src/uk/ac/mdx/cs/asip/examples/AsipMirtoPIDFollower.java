@@ -209,6 +209,8 @@ public class AsipMirtoPIDFollower {
 			mytest.setFreq(30);
 			mytest.setCutOffIR(40);
 
+			mytest.navigate();
+			
 		} else if (args.length == 7) {
 			// the order is: power, maxDelta, Kp, Kd, Ki, freq, cutoffIR
 			try {
@@ -227,11 +229,14 @@ public class AsipMirtoPIDFollower {
 				System.err.println(mytest.getHowTo());
 				e.printStackTrace();
 			}
+			
+			mytest.navigate();
+			
 		} else {
 			System.err.println("Error parsing command line parameters! The correct syntax is: ");
 			System.err.println(mytest.getHowTo());
 		}
 	
-		mytest.navigate();
+		
 	}
 }
