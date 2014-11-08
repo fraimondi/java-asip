@@ -71,7 +71,13 @@ public class AsipMirtoPIDFollower {
 					int middleIR = cutIR(robot.getIR(1));
 					int rightIR = cutIR(robot.getIR(0));
 				
-					curError = computeError(leftIR,middleIR,rightIR,prevError);
+					if ( (leftIR==0) && (middleIR==0) && (rightIR==0)) {
+						// This means that we lost the track. We keep doing what we
+						// were doing before.
+						curError = prevError;
+					} else {
+						curError = computeError(leftIR,middleIR,rightIR,prevError);
+					}
 				
 					proportional = curError - 2000;
 				
