@@ -189,7 +189,7 @@ public class AsipMirtoPIDFollower {
 				// enabled
 				Thread.sleep(10);
 			}
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			robot.stopMotors();
 			e.printStackTrace();
 		}
