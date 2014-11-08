@@ -58,9 +58,10 @@ public class MotorService implements AsipService {
 		if (DEBUG) {
 			System.out.println("Setting motor "+this.motorID+" to "+speed+"...");
 		}
+		// Motors have been mounted the other way around, so setting -speed.
 		asip.getAsipWriter().write(serviceID+"," 
 									+ TAG_SET_MOTOR_SPEED+
-									"," + this.motorID + "," + speed);
+									"," + this.motorID + "," + (-speed));
 	}
 	
 	// Stop the motor (just set speed to 0)

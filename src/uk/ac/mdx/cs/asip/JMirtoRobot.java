@@ -235,8 +235,8 @@ public class JMirtoRobot {
 	// A main method for testing
 	public static void main(String[] args) {
 		
-		JMirtoRobot robot = new JMirtoRobot("/dev/tty.usbserial-A903VH1D");
-//		JMirtoRobot robot = new JMirtoRobot("/dev/ttyAMA0");
+//		JMirtoRobot robot = new JMirtoRobot("/dev/tty.usbserial-A903VH1D");
+		JMirtoRobot robot = new JMirtoRobot("/dev/ttyAMA0");
 
 		
 		try {
