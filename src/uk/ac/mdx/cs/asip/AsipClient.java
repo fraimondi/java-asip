@@ -262,16 +262,20 @@ public class AsipClient {
    		
    		else {
    			// We don't know what to do with it.
-			System.out.println("Event not recognised at position 1: " + input);
-		}
+   			if (DEBUG) {
+   				System.out.println("Event not recognised at position 1: " + input);
+
+   			}
+   		}
     }
     
     // To handle a message starting with an error header (this is a
     // form of error reporting from Arduino)
     private void handleInputError(String input) {
     	// FIXME: improve error handling
-    	System.out.println("Error message received: "+input);
-    	
+    	if (DEBUG) {
+    		System.out.println("Error message received: "+input);
+    	}
     }
     
     // For the moment we just report board's debug messages on screen

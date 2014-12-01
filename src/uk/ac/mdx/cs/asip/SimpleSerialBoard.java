@@ -8,6 +8,7 @@ package uk.ac.mdx.cs.asip;
  */
 import uk.ac.mdx.cs.asip.AsipClient;
 import uk.ac.mdx.cs.asip.AsipWriter;
+import uk.ac.mdx.cs.asip.services.AsipService;
 import jssc.SerialPort;
 import jssc.SerialPortEvent;
 import jssc.SerialPortEventListener;
@@ -139,5 +140,13 @@ public class SimpleSerialBoard {
             }
         }
     }
+	
+	public void addService(char serviceID, AsipService s) {
+		this.asip.addService(serviceID, s);
+	}
+	
+	public AsipClient getAsipClient() {
+		return this.asip;
+	}
 	
 }

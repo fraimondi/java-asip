@@ -54,7 +54,9 @@ public class DistanceService implements AsipService {
 			// We have received a message but it is not a distance reporting event
 			System.out.println("Distance message received but I don't know how to process it: "+message);
 		} else {
-			this.lastDistance = Integer.parseInt(message.split(",")[3+this.distanceID]);
+			String distances = message.substring(message.indexOf("{")+1,
+					message.indexOf("}"));
+			this.lastDistance = Integer.parseInt(distances.split(",")[this.distanceID]);
 		}
 	}
 	
