@@ -59,7 +59,6 @@ public class NeoPixelService implements AsipService {
 	
 	// This method sends the message to set the servo angle
 	public void setPixelColor(int pixel, int red, int green, int blue) {
-		System.out.println("Writing: " + serviceID+","+"C"+","+this.stripID+","+pixel+","+red+","+green+","+blue);
 		aw.write(serviceID+","+"C"+","+this.stripID+","+pixel+","+red+","+green+","+blue+"\n");
 	}
 	
@@ -68,7 +67,6 @@ public class NeoPixelService implements AsipService {
 	}
 	
 	public void show() {
-		System.out.println("Writing: "+serviceID+","+"S"+","+this.stripID);
 		aw.write(serviceID+","+"S"+","+this.stripID+"\n");
 	}
 
