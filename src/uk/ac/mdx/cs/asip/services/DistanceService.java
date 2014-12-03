@@ -36,11 +36,11 @@ public class DistanceService implements AsipService {
 	}
 
 	public void requestDistance() {
-		this.asip.getAsipWriter().write(this.serviceID+","+REQUEST_SINGLE_DISTANCE);
+		this.asip.getAsipWriter().write(this.serviceID+","+REQUEST_SINGLE_DISTANCE+"\n");
 	}
 	
 	public void enableContinuousReporting(int interval) {
-		this.asip.getAsipWriter().write(this.serviceID+","+AsipService.AUTOEVENT_REQUEST+","+interval);
+		this.asip.getAsipWriter().write(this.serviceID+","+AsipService.AUTOEVENT_REQUEST+","+interval+"\n");
 	}
 	
 	public int getDistance() {
