@@ -65,9 +65,7 @@ public class LightSwitch extends SimpleSerialBoard {
 				testBoard.digitalWrite(ledPin, AsipClient.LOW); // we turn it
 																// off otherwise
 			}
-			;
 			oldstate = buttonState;
-
 			}
 		
 	}
