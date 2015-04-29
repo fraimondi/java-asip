@@ -20,7 +20,7 @@ public class SimpleBlinkOverTCP extends SimpleTCPBoard {
 		// We could pass the IP address as an argument, for the moment
 		// I hard-code it because I'm lazy.
 		
-		SimpleBlinkOverTCP testBoard = new SimpleBlinkOverTCP("192.168.0.73");
+		SimpleBlinkOverTCP testBoard = new SimpleBlinkOverTCP("10.16.107.162");
 		
 		try {
 			Thread.sleep(2500);

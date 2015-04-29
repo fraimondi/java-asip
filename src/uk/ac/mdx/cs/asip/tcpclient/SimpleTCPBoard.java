@@ -28,7 +28,7 @@ public class SimpleTCPBoard {
 	// The asip object employs a SimpleTCPWriter that implements AsipWriter.	
 	public SimpleTCPBoard(String boardIP) {
 		this.boardIP = boardIP;
-		Socket s;
+		Socket s = null;
 		
 		// FIXME: improve error handling
 		try {
@@ -41,9 +41,15 @@ public class SimpleTCPBoard {
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			try {
+				s.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		} 
 
 		

@@ -28,7 +28,7 @@ public class LightSwitchOverTCP extends SimpleTCPBoard {
 		// We could pass the port as an argument, for the moment
 		// I hard-code it because I'm lazy.
 	
-		LightSwitchOverTCP testBoard = new LightSwitchOverTCP("192.168.0.73");
+		LightSwitchOverTCP testBoard = new LightSwitchOverTCP("10.16.107.162");
 		
 		testBoard.getAsipClient().requestPortMapping();
 
