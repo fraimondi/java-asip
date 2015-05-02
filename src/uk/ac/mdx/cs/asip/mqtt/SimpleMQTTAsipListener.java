@@ -9,7 +9,7 @@ import uk.ac.mdx.cs.asip.AsipClient;
 
 public class SimpleMQTTAsipListener implements MqttCallback {
 	
-	boolean DEBUG = true;
+	boolean DEBUG = false;
 	
 	AsipClient asip;
 	

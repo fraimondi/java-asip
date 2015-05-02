@@ -33,10 +33,10 @@ public class SimpleAsipMQTTSerialBridge {
 	SerialPort serialPort;
 
 
-	String pubTopic = "asip/board1/out";
-	String subTopic = "asip/board1/in";
+	String pubTopic = "asip/board4/out";
+	String subTopic = "asip/board4/in";
 	
-	String clientID = "board1";
+	String clientID = "board4";
 	
 	MqttClient mqttClient;
 	

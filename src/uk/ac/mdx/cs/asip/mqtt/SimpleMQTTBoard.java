@@ -15,13 +15,13 @@ import uk.ac.mdx.cs.asip.tcpclient.SimpleTCPWriter;
 
 public class SimpleMQTTBoard {
 
-	static boolean DEBUG = true;
+	static boolean DEBUG = false;
 
 	// TODO: covert these to private fields, update constructors, getters, setters etc.
 	public static int MQTT_SERVERPORT = 1883;
 	public static String BROKER = "tcp://10.16.107.55";
 	public static int QOS = 0;
-	public static String clientID = "SimpleMQTTBoard1";
+	public static String clientID = "SimpleMQTTBoard-";
 	
 	// They are not inverted: they are for the receiving board
 	public static String SUBTOPIC = "asip/"+clientID+"/out";
@@ -46,7 +46,7 @@ public class SimpleMQTTBoard {
 		
 		try {
 			String url = broker+":"+MQTT_SERVERPORT;
-			mqttClient = new MqttClient(url, clientID, persistence);
+			mqttClient = new MqttClient(url, clientID+"-"+boardID, persistence);
             MqttConnectOptions connOpts = new MqttConnectOptions();
             connOpts.setCleanSession(true);
             mqttClient.connect(connOpts);
