@@ -1,11 +1,5 @@
 package uk.ac.mdx.cs.asip.mqtt;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -138,8 +132,7 @@ public class SimpleAsipMQTTSerialBridge {
 		}
 
 		// When an event is received on the serial port, it is published
-		// to the broker
-		
+		// to the broker	
 		class SerialPortReaderMQTT implements SerialPortEventListener {
 
 			private String buffer = ""; // we store partial messages here.
