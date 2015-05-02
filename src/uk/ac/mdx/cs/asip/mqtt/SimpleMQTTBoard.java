@@ -21,9 +21,11 @@ public class SimpleMQTTBoard {
 	public static int MQTT_SERVERPORT = 1883;
 	public static String BROKER = "tcp://10.16.107.55";
 	public static int QOS = 0;
-	public static String clientID = "board1";
-	public static String PUBTOPIC = "asip/"+clientID+"/out";
-	public static String SUBTOPIC = "asip/"+clientID+"/in";
+	public static String clientID = "SimpleMQTTBoard1";
+	
+	// They are not inverted: they are for the receiving board
+	public static String SUBTOPIC = "asip/"+clientID+"/out";
+	public static String PUBTOPIC = "asip/"+clientID+"/in";
 	
 	// The client for the aisp protocol
 	AsipClient asip;
@@ -34,12 +36,16 @@ public class SimpleMQTTBoard {
 	// The constructor opens the connection to the MQTT broker.
 	// The ASIP writer is just a publisher; incoming messages
 	// are intercepted by subscribing to the appropriate topic.
-	public SimpleMQTTBoard(String boardIP) {
+	public SimpleMQTTBoard(String broker, String boardID) {
 		
 		MemoryPersistence persistence = new MemoryPersistence();
 		
+		// These are from the point of view of the receiving board
+		PUBTOPIC = "asip/"+boardID+"/in";
+		SUBTOPIC = "asip/"+boardID+"/out";
+		
 		try {
-			String url = BROKER+":"+MQTT_SERVERPORT;
+			String url = broker+":"+MQTT_SERVERPORT;
 			mqttClient = new MqttClient(url, clientID, persistence);
             MqttConnectOptions connOpts = new MqttConnectOptions();
             connOpts.setCleanSession(true);

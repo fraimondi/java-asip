@@ -1,13 +1,7 @@
 package uk.ac.mdx.cs.asip.mqtt;
 
-import java.io.DataInputStream;
-import java.io.IOException;
-
-import jssc.SerialPortException;
-
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
-import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
@@ -18,8 +12,6 @@ public class SimpleMQTTAsipListener implements MqttCallback {
 	boolean DEBUG = true;
 	
 	AsipClient asip;
-	
-	private String buffer = "";
 	
 	public SimpleMQTTAsipListener(AsipClient a) {
 		this.asip = a; 

@@ -26,7 +26,7 @@ public class SimpleAsipMQTTSerialBridge {
 	static boolean DEBUG = true;
 
 	public static int MQTT_SERVERPORT = 1883;
-	public static String BROKER = "tcp://10.16.107.55";
+	public static String BROKER = "tcp://192.168.0.70";
 	public static int QOS = 0;
 	
 	// This board uses serial communication (provided by jssc)
