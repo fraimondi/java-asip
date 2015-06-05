@@ -29,7 +29,7 @@ public class LightSwitchOverMQTT extends SimpleMQTTBoard {
 		// We could pass the port as an argument, for the moment
 		// I hard-code it because I'm lazy.
 	
-		LightSwitchOverMQTT testBoard = new LightSwitchOverMQTT("tcp://192.168.0.70","board1");
+		LightSwitchOverMQTT testBoard = new LightSwitchOverMQTT("tcp://192.168.0.101","board4");
 		
 		testBoard.getAsipClient().requestPortMapping();
 
@@ -41,7 +41,7 @@ public class LightSwitchOverMQTT extends SimpleMQTTBoard {
 			Thread.sleep(500);
 			testBoard.getAsipClient().setPinMode(ledPin, AsipClient.OUTPUT);
 			Thread.sleep(100);
-			testBoard.getAsipClient().setPinMode(buttonPin, AsipClient.INPUT_PULLUP);
+			testBoard.getAsipClient().setPinMode(buttonPin, AsipClient.INPUT);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

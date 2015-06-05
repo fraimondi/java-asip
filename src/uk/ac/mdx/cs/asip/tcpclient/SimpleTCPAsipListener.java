@@ -7,7 +7,7 @@ import uk.ac.mdx.cs.asip.AsipClient;
 
 public class SimpleTCPAsipListener extends Thread {
 	
-	boolean DEBUG = true;
+	boolean DEBUG = false;
 	
 	DataInputStream inputStream;
 	AsipClient asip;

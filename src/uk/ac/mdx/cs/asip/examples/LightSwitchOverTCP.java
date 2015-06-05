@@ -28,7 +28,7 @@ public class LightSwitchOverTCP extends SimpleTCPBoard {
 		// We could pass the port as an argument, for the moment
 		// I hard-code it because I'm lazy.
 	
-		LightSwitchOverTCP testBoard = new LightSwitchOverTCP("10.16.107.162");
+		LightSwitchOverTCP testBoard = new LightSwitchOverTCP("192.168.2.8");
 		
 		testBoard.getAsipClient().requestPortMapping();
 
@@ -40,7 +40,7 @@ public class LightSwitchOverTCP extends SimpleTCPBoard {
 			Thread.sleep(500);
 			testBoard.getAsipClient().setPinMode(ledPin, AsipClient.OUTPUT);
 			Thread.sleep(100);
-			testBoard.getAsipClient().setPinMode(buttonPin, AsipClient.INPUT_PULLUP);
+			testBoard.getAsipClient().setPinMode(buttonPin, AsipClient.INPUT);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
