@@ -201,6 +201,6 @@ public class SimpleAsipTCPSerialBridge {
 
 	public static void main(String args[]) {
 		SimpleAsipTCPSerialBridge bridge = new SimpleAsipTCPSerialBridge(
-				"/dev/ttyACM0");
+				"/dev/cu.usbmodem1411");
 	}
 }

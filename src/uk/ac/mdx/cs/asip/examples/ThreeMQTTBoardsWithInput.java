@@ -1,6 +1,7 @@
 package uk.ac.mdx.cs.asip.examples;
 
 import uk.ac.mdx.cs.asip.AsipClient;
+import uk.ac.mdx.cs.asip.SimpleSerialBoard;
 import uk.ac.mdx.cs.asip.mqtt.SimpleMQTTBoard;
 
 /* Three boards using MQTT:
@@ -14,8 +15,7 @@ public class ThreeMQTTBoardsWithInput {
 
 	public static void main(String args[]) {
 		String broker = "tcp://192.168.0.70";
-		SimpleMQTTBoard board1 = new SimpleMQTTBoard(broker, "board4");
-		SimpleMQTTBoard board2 = new SimpleMQTTBoard(broker, "board1");
+		SimpleSerialBoard board2 = new SimpleSerialBoard("/dev/cu.usbmodem1411");
 		SimpleMQTTBoard board3 = new SimpleMQTTBoard(broker, "board2");
 		
 		/* Setting up things */		
