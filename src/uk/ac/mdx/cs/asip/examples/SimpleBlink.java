@@ -35,7 +35,7 @@ public class SimpleBlink extends SimpleSerialBoard {
 		while(true) {
 			try {
 				testBoard.digitalWrite(13, AsipClient.HIGH);
-				Thread.sleep(2000);
+				Thread.sleep(500);
 				testBoard.digitalWrite(13, AsipClient.LOW);
 				Thread.sleep(500);
 			} catch (InterruptedException e) {

@@ -105,7 +105,7 @@ public class SimpleNeoPixelWithDistance extends SimpleSerialBoard {
 					// setting a pixel to red and everything else to off
 					for (int j = 1; j<numPixels; j++) {
 						if ( i == j) {
-							testBoard.setColor(strip1, j, 255, 0, 0);
+							testBoard.setColor(strip1, j, 125, 0, 125);
 						} else {
 							testBoard.setColor(strip1, j, 0, 0, 0);
 						}
@@ -120,7 +120,7 @@ public class SimpleNeoPixelWithDistance extends SimpleSerialBoard {
 					// setting a pixel to red and everything else to off
 					for (int j = 0; j<numPixels; j++) {
 						if ( i == j) {
-							testBoard.setColor(strip0, j, 255, 0, 0);
+							testBoard.setColor(strip0, j, 125, 0, 125);
 						} else {
 							testBoard.setColor(strip0, j, 0, 0, 0);
 						}
@@ -134,7 +134,7 @@ public class SimpleNeoPixelWithDistance extends SimpleSerialBoard {
 					// setting a pixel to red and everything else to off
 					for (int j = 0; j<numPixels; j++) {
 						if ( i == j) {
-							testBoard.setColor(strip0, j, 255, 0, 0);
+							testBoard.setColor(strip0, j, 125, 0, 125);
 						} else {
 							testBoard.setColor(strip0, j, 0, 0, 0);
 						}

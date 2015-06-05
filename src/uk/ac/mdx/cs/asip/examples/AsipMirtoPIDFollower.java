@@ -1,6 +1,6 @@
 package uk.ac.mdx.cs.asip.examples;
 
-import uk.ac.mdx.cs.asip.JMirtoRobot;
+import uk.ac.mdx.cs.asip.JMirtoRobotOverTCP;
 
 
 public class AsipMirtoPIDFollower {
@@ -83,7 +83,7 @@ public class AsipMirtoPIDFollower {
 
 	private int cutOffIR = 40;
 	
-	private int PWR = 75;
+	private int PWR = 50;
 	
 	private int freq = 35; // frequency of updates;
 	private int maxDelta = PWR; // max correction
@@ -115,7 +115,7 @@ public class AsipMirtoPIDFollower {
 	
 	public void navigate() {
 		
-		JMirtoRobot robot = new JMirtoRobot("/dev/ttyAMA0");
+		JMirtoRobotOverTCP robot = new JMirtoRobotOverTCP("192.168.0.103");
 //		JMirtoRobot robot = new JMirtoRobot("/dev/tty.usbmodem1411");
 		
 		try {
@@ -204,15 +204,15 @@ public class AsipMirtoPIDFollower {
 		AsipMirtoPIDFollower mytest = new AsipMirtoPIDFollower();
 		if (args.length == 0 ) {
 			// No command line parameters provided
-			mytest.setPWR(75);
-			mytest.setMaxDelta(75);
+			mytest.setPWR(50);
+			mytest.setMaxDelta(50);
 
-			mytest.setKp(0.05);
-			mytest.setKd(1.6);
-			mytest.setKi(0.0001);
+			mytest.setKp(0.015);
+			mytest.setKd(0);
+			mytest.setKi(0);
 
-			mytest.setFreq(30);
-			mytest.setCutOffIR(40);
+			mytest.setFreq(50);
+			mytest.setCutOffIR(50);
 
 			mytest.navigate();
 			
