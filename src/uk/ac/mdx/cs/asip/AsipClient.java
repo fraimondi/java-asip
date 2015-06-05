@@ -15,7 +15,7 @@ public class AsipClient {
 	
 	
 	/************   BEGIN CONSTANTS DEFINITION ****************/
-	private boolean DEBUG = false; // Do you want me to print verbose debug information?
+	private boolean DEBUG = true; // Do you want me to print verbose debug information?
 	
 	private final int MAX_NUM_DIGITAL_PINS = 72; // 9 ports of 8 pins at most?
 	private final int MAX_NUM_ANALOG_PINS = 16; // Just a random number...
@@ -299,21 +299,26 @@ public class AsipClient {
     		System.out.println("DEBUG: processPortData for port "+port+" and bitmask "+bitmask);
     	}
     	HashMap<Integer,Integer> singlePortMap = portMapping.get(port);
-    	
-    	for (Map.Entry<Integer, Integer> pinMap : singlePortMap.entrySet() ) {
-    		if ( (pinMap.getKey() & bitmask) != 0x0 ) {
-    			digital_input_pins[pinMap.getValue()] = HIGH;    		
-    	    	if (DEBUG) {
-    	    		System.out.println("DEBUG: processPortData setting pin " + pinMap.getValue() + " to HIGH");
-    	    	}
-    		} 
-    		else {
-    			digital_input_pins[pinMap.getValue()] = LOW;
-    	    	if (DEBUG) {
-    	    		System.out.println("DEBUG: processPortData setting pin " + pinMap.getValue() + " to LOW");
-    	    	}
-    		}
-    	}
+
+		if (singlePortMap != null) {
+			for (Map.Entry<Integer, Integer> pinMap : singlePortMap.entrySet()) {
+				if ((pinMap.getKey() & bitmask) != 0x0) {
+					digital_input_pins[pinMap.getValue()] = HIGH;
+					if (DEBUG) {
+						System.out
+								.println("DEBUG: processPortData setting pin "
+										+ pinMap.getValue() + " to HIGH");
+					}
+				} else {
+					digital_input_pins[pinMap.getValue()] = LOW;
+					if (DEBUG) {
+						System.out
+								.println("DEBUG: processPortData setting pin "
+										+ pinMap.getValue() + " to LOW");
+					}
+				}
+			}
+		}
     	
     }
     

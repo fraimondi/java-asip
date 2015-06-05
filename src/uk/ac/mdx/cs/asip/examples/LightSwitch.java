@@ -39,7 +39,7 @@ public class LightSwitch extends SimpleSerialBoard {
 			Thread.sleep(500);
 			testBoard.setPinMode(ledPin, AsipClient.OUTPUT);
 			Thread.sleep(100);
-			testBoard.setPinMode(buttonPin, AsipClient.INPUT_PULLUP);
+			testBoard.setPinMode(buttonPin, AsipClient.INPUT);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
