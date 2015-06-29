@@ -6,6 +6,7 @@
     <path id="java-asip.classpath">
         <pathelement location="bin"/>
         <pathelement location="lib/jssc-2.8.0.jar"/>
+    	<pathelement location="lib/org.eclipse.paho.client.mqttv3-1.0.2.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
