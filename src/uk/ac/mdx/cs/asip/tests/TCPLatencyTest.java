@@ -20,14 +20,14 @@ public class TCPLatencyTest extends SimpleTCPBoard {
 
 	public static void main(String[] args) {
 
-		int buttonPin = 2; // the number for the detection pin on the Arduino
+		int buttonPin = 4; // the number for the detection pin on the Arduino
 		int ledPin = 13; // the number for the output pin on the Arduino
 
 		int buttonState = 0; // initialise the variable for when we press the
 								// button
 
 		// We pass the address as an argument
-		TCPLatencyTest tB = new TCPLatencyTest("127.0.0.1");
+		TCPLatencyTest tB = new TCPLatencyTest("192.168.0.101");
 
 		AsipClient testBoard = tB.getAsipClient();
 
@@ -38,11 +38,16 @@ public class TCPLatencyTest extends SimpleTCPBoard {
 			Thread.sleep(500);
 			testBoard.requestPortMapping();
 			Thread.sleep(500);
+			testBoard.requestPortMapping();
+			Thread.sleep(500);
+			testBoard.requestPortMapping();
+			Thread.sleep(500);
 			testBoard.setPinMode(ledPin, AsipClient.OUTPUT);
 			Thread.sleep(100);
 			testBoard.setPinMode(buttonPin, AsipClient.INPUT);
 			Thread.sleep(100);
 			testBoard.setAutoReportInterval(0);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -68,10 +73,13 @@ public class TCPLatencyTest extends SimpleTCPBoard {
 
 				// read time
 				long start = System.nanoTime();
+				int temp = 0;
 				while (buttonState != AsipClient.HIGH) {
 					buttonState = testBoard.digitalRead(buttonPin);
-					System.out.print("");; // FIXME: not working without this interrupt, why??
+					System.out.print("");
+					//Thread.sleep(1);
 				}
+				System.out.println("I'm out!");
 				long end = System.nanoTime();
 				double diff = (end - start) / 1000000;
 				System.out.println(diff);
