@@ -26,7 +26,7 @@ public class SimpleAsipMQTTSerialBridge {
 	static boolean DEBUG = true;
 
 	public static int MQTT_SERVERPORT = 1883;
-	public static String BROKER = "tcp://192.168.0.70";
+	public static String BROKER = "tcp://127.0.0.1";
 	public static int QOS = 0;
 	
 	// This board uses serial communication (provided by jssc)
@@ -201,6 +201,6 @@ public class SimpleAsipMQTTSerialBridge {
 
 	public static void main(String args[]) {
 		SimpleAsipMQTTSerialBridge bridge = new SimpleAsipMQTTSerialBridge(
-				"/dev/cu.usbmodem1411");
+				"/dev/tty.usbmodem1411");
 	}
 }

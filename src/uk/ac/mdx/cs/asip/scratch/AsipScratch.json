@@ -1,0 +1,16 @@
+{	"extensionName": "Off-line Scratch to ASIP extension",
+	"extensionPort": 14275,
+	"blockSpecs": [
+
+		[" ", "set pin %n as %m.mode", "pinMode", 2, "Digital Input"],
+		[" ", "digital write pin %n %m.highLow", "digitalWrite", 13, "high"],
+		[" ", "analog write pin %n value %n", "analogWrite", 3, 255],
+		[" ", "servo write pin %n degrees %n", "servoWrite", 5, 180],
+		["b", "digital read pin %n", "digitalRead", 2],
+		["r", "analog read pin %n", "analogRead", 0],
+	],
+	"menus": {
+		"mode": ["Digital Input", "Digital Output","Analog Output(PWM)","Servo"],
+		"highLow": ["high", "low"],
+	},
+}

@@ -20,14 +20,14 @@ public class MQTTLatencyTest extends SimpleMQTTBoard {
 
 	public static void main(String[] args) {
 
-		int buttonPin = 2; // the number for the detection pin on the Arduino
+		int buttonPin = 4; // the number for the detection pin on the Arduino
 		int ledPin = 13; // the number for the output pin on the Arduino
 
 		int buttonState = 0; // initialise the variable for when we press the
 		// button
 
 		// We could pass the port as an argument, for the moment
-		MQTTLatencyTest tB = new MQTTLatencyTest("tcp://127.0.0.1","board4");
+		MQTTLatencyTest tB = new MQTTLatencyTest("tcp://192.168.0.101","board4");
 
 		AsipClient testBoard = tB.getAsipClient();
 

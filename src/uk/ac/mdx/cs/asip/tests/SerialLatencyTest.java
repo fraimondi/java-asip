@@ -20,7 +20,7 @@ public class SerialLatencyTest extends SimpleSerialBoard {
 
 	public static void main(String[] args) {
 
-		int buttonPin = 2; // the number for the detection pin on the Arduino
+		int buttonPin = 4; // the number for the detection pin on the Arduino
 		int ledPin = 13; // the number for the output pin on the Arduino
 
 		int buttonState = 0; // initialise the variable for when we press the
@@ -30,7 +30,7 @@ public class SerialLatencyTest extends SimpleSerialBoard {
 		// I hard-code it because I'm lazy.
 
 		// On mac os x is something like: /dev/tty.usbmodemfd121
-		SerialLatencyTest tB = new SerialLatencyTest("/dev/tty.usbmodemfd121");
+		SerialLatencyTest tB = new SerialLatencyTest("/dev/tty.usbmodem1411");
 
 		AsipClient testBoard = tB.getAsipClient();
 

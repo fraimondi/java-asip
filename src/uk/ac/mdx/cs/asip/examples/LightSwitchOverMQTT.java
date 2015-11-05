@@ -29,7 +29,7 @@ public class LightSwitchOverMQTT extends SimpleMQTTBoard {
 		// We could pass the port as an argument, for the moment
 		// I hard-code it because I'm lazy.
 	
-		LightSwitchOverMQTT testBoard = new LightSwitchOverMQTT("tcp://192.168.0.101","board4");
+		LightSwitchOverMQTT testBoard = new LightSwitchOverMQTT("tcp://192.168.0.100","board4");
 		
 		testBoard.getAsipClient().requestPortMapping();
 
