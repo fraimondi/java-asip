@@ -24,14 +24,18 @@ import uk.ac.mdx.cs.asip.SimpleSerialBoard;
 
 public class HTTPScratchToAsipBridge implements Runnable {
 
-	public static final int PORT = 14275;
+	public static final int HTTP_PORT = 14275;
+	
+	public static final String SERIAL_PORT = "/dev/tty.usbmodem1421";
+	
+	public static boolean DEBUG=true;
 	
 	private InputStream sockIn;
     private OutputStream sockOut;
 
     Date moDate = new Date();
 
-    SimpleSerialBoard board = new SimpleSerialBoard("/dev/tty.usbmodem1411");
+    SimpleSerialBoard board = new SimpleSerialBoard(SERIAL_PORT);
     
 	@Override
 	public void run() {
@@ -39,7 +43,8 @@ public class HTTPScratchToAsipBridge implements Runnable {
             InetAddress addr = InetAddress.getLocalHost();
             System.out.println("HTTPScratchToAsipBridge app started on " + addr.toString());
             
-            ServerSocket serverSock = new ServerSocket(PORT);
+            @SuppressWarnings("resource")
+			ServerSocket serverSock = new ServerSocket(HTTP_PORT);
             
             while (true) {
                 Socket sock = serverSock.accept();
@@ -56,6 +61,7 @@ public class HTTPScratchToAsipBridge implements Runnable {
                 }
                 sock.close();
             }
+            
         } catch (Throwable  ex) {
             ex.printStackTrace();
         }
@@ -78,12 +84,12 @@ public class HTTPScratchToAsipBridge implements Runnable {
 
         String header = httpBuf.substring(0, i);
         if (header.indexOf("GET ") != 0) {
-            System.out.println("Only GET connections are supported");
+            System.err.println("Only GET connections are supported");
             return;
         }
         i = header.indexOf("HTTP/1");
         if (i < 0) {
-            System.out.println("Wrong HTTP header.");
+            System.err.println("Wrong HTTP header.");
             return;
         }
         header = header.substring(5, i - 1);
@@ -102,7 +108,7 @@ public class HTTPScratchToAsipBridge implements Runnable {
     	// Send a Flash null-teriminated cross-domain policy file.
         String policyFile
                 = "<cross-domain-policy>\n"
-                + " <allow-access-from domain=\"*\" to-ports=\"" + PORT + "\"/>\n"
+                + " <allow-access-from domain=\"*\" to-ports=\"" + HTTP_PORT + "\"/>\n"
                 + "</cross-domain-policy>\n\0";
         sendResponse(policyFile);
     }
@@ -138,7 +144,9 @@ public class HTTPScratchToAsipBridge implements Runnable {
 			// "Digital Input", "Digital Output","Analog Input","Analog Output(PWM)","Servo"
 			int asipMode = 0;
 			// FIXME: this is a simplification, we assume input = input_pullup!
-			System.out.println("DEBUG: requested mode is "+parts[2]);
+			if (DEBUG) {
+				System.out.println("DEBUG: requested mode is "+parts[2]);
+			}
 			if (parts[2].equals("Digital Input")) {
 				asipMode = AsipClient.INPUT_PULLUP;				
 			} else if ((parts[2].equals("Digital Output")) ) {
@@ -149,15 +157,23 @@ public class HTTPScratchToAsipBridge implements Runnable {
 				// FIXME: Add error!
 			}
 			board.setPinMode(Integer.parseInt(parts[1]), asipMode);
-			System.out.println("Setting pin "+Integer.parseInt(parts[1])+ "to mode " + asipMode);
+			if (DEBUG) {
+				System.out.println("Setting pin "+Integer.parseInt(parts[1])+ " to mode " + asipMode);
+			}
 		} else if (cmd.equals("digitalWrite")) {
-			System.out.println("Setting pin "+Integer.parseInt(parts[1])+ "to "+ ("high".equals(parts[2]) ? AsipClient.HIGH : AsipClient.LOW ));
+			if (DEBUG) {
+				System.out.println("Setting pin "+Integer.parseInt(parts[1])+ " to "+ ("high".equals(parts[2]) ? AsipClient.HIGH : AsipClient.LOW ));
+			}
 			board.digitalWrite(Integer.parseInt(parts[1]), ("high".equals(parts[2]) ? AsipClient.HIGH : AsipClient.LOW ));
 		} else if (cmd.equals("analogWrite")) {
-			System.out.println("Analog write pin "+Integer.parseInt(parts[1])+ "to value " + parts[2]);
+			if (DEBUG) {
+				System.out.println("Analog write pin "+Integer.parseInt(parts[1])+ " to value " + parts[2]);
+			}
 			board.analoglWrite(Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
 		} else if (cmd.equals("servoWrite")) {
-			System.out.println("Servo write pin "+Integer.parseInt(parts[1])+ "with value " + parts[2]);
+			if (DEBUG) {
+				System.out.println("Servo write pin "+Integer.parseInt(parts[1])+ " with value " + parts[2]);
+			}
 			// TODO: FIXME!! Add servo support
 			
 		} else if (cmd.equals("poll")) {

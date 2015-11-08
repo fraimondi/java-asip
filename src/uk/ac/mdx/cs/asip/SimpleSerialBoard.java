@@ -45,7 +45,17 @@ public class SimpleSerialBoard {
 					// + SerialPort.MASK_DSR;// Prepare mask
 			serialPort.setEventsMask(mask);// Set mask
 		} catch (Exception ex) {
-			System.out.println(ex);
+			//System.out.println(ex);
+			System.err.println("Could not open port "+port);
+			System.err.println("Please check the Arduino connection and try again");
+			System.exit(0);
+		}
+		
+		
+		if (!serialPort.isOpened()) {
+			System.err.println("Could not open port "+port);
+			System.err.println("Please check the Arduino connection and try again");
+			System.exit(0);
 		}
 
 		try {
@@ -125,7 +135,7 @@ public class SimpleSerialBoard {
             					buffer = "";
             					val = val.substring(val.indexOf("\n")+1);
             				}
-            				// If there is some leftover to process we add tu buffer
+            				// If there is some leftover to process we add to buffer
             				if (val.length() > 0 ) {
             					buffer = val;
             				}

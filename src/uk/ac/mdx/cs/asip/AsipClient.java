@@ -218,9 +218,13 @@ public class AsipClient {
 			this message says the data on port 4 has a value of F */
 			if ( input.charAt(3) == PORT_DATA) {
 				// We need to process port number and bit mask for it. 
-				int port = Integer.parseInt(input.substring(5,6));
-				int bitmask = Integer.parseInt(input.substring(7),16); // convert to base 16
-				processPortData(port,bitmask);				
+				try {
+					int port = Integer.parseInt(input.substring(5,6));
+					int bitmask = Integer.parseInt(input.substring(7),16); // convert to base 16
+					processPortData(port,bitmask);			
+				} catch (Exception e) {
+					System.err.println("Discarding the following message: "+input);
+				}
 			} else if ( input.charAt(3) == PORT_MAPPING ) {
 				processPinMapping(input);
 			} else if (input.charAt(3) == ANALOG_VALUE) {
@@ -341,21 +345,25 @@ public class AsipClient {
     	// I just iterate over the array getting each port:position 
     	int curPin = 0;
     	for (String singleMapping: ports) {
-    		int port = Integer.parseInt(singleMapping.split(":")[0]);
-    		int position = Integer.parseInt(singleMapping.split(":")[1],16);
+    		try {
+    			int port = Integer.parseInt(singleMapping.split(":")[0]);
+    			int position = Integer.parseInt(singleMapping.split(":")[1],16);
 
-    		// If portMapping already contains something for this port,
-    		// we add the additional position mapping
-    		if (portMapping.containsKey(port)) {
-    			portMapping.get(port).put(position, curPin);
-    		} else {
-    			// Otherwise, we create a new key in portMapping
-    			HashMap<Integer,Integer> newMap = new HashMap<Integer,Integer>();
-    			newMap.put(position, curPin);
-    			portMapping.put(port,newMap);
-    			
-    		}    		
-    		curPin++;
+    			// If portMapping already contains something for this port,
+    			// we add the additional position mapping
+    			if (portMapping.containsKey(port)) {
+    				portMapping.get(port).put(position, curPin);
+    			} else {
+    				// Otherwise, we create a new key in portMapping
+    				HashMap<Integer,Integer> newMap = new HashMap<Integer,Integer>();
+    				newMap.put(position, curPin);
+    				portMapping.put(port,newMap);  	  			
+    			}    		
+    			curPin++;
+    		} catch (Exception e) {
+    			System.err.println("There was an error processing the following pin mapping: "+singleMapping);
+    			System.err.println("Mapping ignored");
+    		}
     	}
     	
     	if (DEBUG) {
