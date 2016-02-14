@@ -115,7 +115,8 @@ public class AsipMirtoPIDFollower {
 	
 	public void navigate() {
 		
-		JMirtoRobotOverTCP robot = new JMirtoRobotOverTCP("192.168.0.103");
+		JMirtoRobotOverTCP robot = new JMirtoRobotOverTCP();
+		robot.initialize("192.168.0.103");
 //		JMirtoRobot robot = new JMirtoRobot("/dev/tty.usbmodem1411");
 		
 		try {
