@@ -20,6 +20,7 @@ public class SimpleTCPWriter implements AsipWriter {
 		// FIXME: add better exception handling
 		try {
 			outputStream.writeUTF(val);
+			outputStream.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

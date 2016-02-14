@@ -21,7 +21,7 @@ import jssc.SerialPortException;
 
 public class SimpleAsipTCPSerialBridge {
 
-	static boolean DEBUG = true;
+	static boolean DEBUG = false;
 
 	public static int SERVERPORT = 6789;
 
@@ -124,7 +124,7 @@ public class SimpleAsipTCPSerialBridge {
 					if (DEBUG) {
 						System.out.println("Received in inputStream: " + val);
 					}
-					serialPort.writeString(val);
+					serialPort.writeString(val+"\n");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -200,7 +200,11 @@ public class SimpleAsipTCPSerialBridge {
 	}
 
 	public static void main(String args[]) {
+		if ( args.length < 1 ) {
+			System.err.println("Please enter the serial port for the ASIP bridge");
+			System.exit(1);
+		}
 		SimpleAsipTCPSerialBridge bridge = new SimpleAsipTCPSerialBridge(
-				"/dev/tty.usbmodem1411");
+				args[0]);
 	}
 }

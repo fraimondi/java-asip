@@ -24,7 +24,9 @@ public class SimpleTCPAsipListener extends Thread {
 		while (true) {
 			try {
 				String val = inputStream.readUTF();
-				System.err.println(val);
+				if (DEBUG) {
+					System.err.println(val);
+				}
 				asip.processInput(val);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

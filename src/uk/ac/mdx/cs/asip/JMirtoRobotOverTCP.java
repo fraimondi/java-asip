@@ -37,6 +37,12 @@ public class JMirtoRobotOverTCP extends JMirtoRobot {
 			inputStream = new DataInputStream( s.getInputStream()); 
 			asip = new AsipClient(new SimpleTCPWriter(outputStream));
 			SimpleTCPAsipListener asipListener = new SimpleTCPAsipListener(inputStream, asip);
+			Thread.sleep(800);
+			this.asip.requestPortMapping();
+			Thread.sleep(500);
+			this.asip.requestPortMapping();
+			Thread.sleep(500);
+			this.asip.requestPortMapping();
 			
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -59,25 +65,25 @@ public class JMirtoRobotOverTCP extends JMirtoRobot {
 	public static void main(String[] args) {
 		
 		JMirtoRobotOverTCP robot = new JMirtoRobotOverTCP();
-		robot.initialize("192.168.0.100");
+		robot.initialize("192.168.0.119");
 	
 		
 		try {
 			Thread.sleep(500);
 			robot.setup();
-			Thread.sleep(500);	
+			Thread.sleep(200);	
 			robot.clearLCDScreen();
-			Thread.sleep(50);
-			robot.writeLCDLine("  Java Test Loop ", 0);
-			Thread.sleep(50);
+			Thread.sleep(150);
+			robot.writeLCDLine("Java Test Loop", 0);
+			Thread.sleep(150);
 			robot.writeLCDLine("  Line 1 ", 1);
-			Thread.sleep(50);	
+			Thread.sleep(150);	
 			robot.writeLCDLine("  Line 2 ", 2);
-			Thread.sleep(50);		
+			Thread.sleep(150);		
 			robot.writeLCDLine("  Line 3 ", 3);
-			Thread.sleep(50);		
+			Thread.sleep(150);		
 			robot.writeLCDLine("  Line 4 ", 4);
-			Thread.sleep(50);		
+			Thread.sleep(150);		
 			
 			robot.playNote(262, 500);
 			Thread.sleep(500);
