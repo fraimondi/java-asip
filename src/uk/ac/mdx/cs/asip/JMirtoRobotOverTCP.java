@@ -62,7 +62,7 @@ public class JMirtoRobotOverTCP extends JMirtoRobot {
 
 
 	// A main method for testing
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		
 		JMirtoRobotOverTCP robot = new JMirtoRobotOverTCP();
 		robot.initialize("192.168.0.119");
@@ -116,6 +116,7 @@ public class JMirtoRobotOverTCP extends JMirtoRobot {
 			e.printStackTrace();
 		}
 		
-	}
+	} 
+	*/
 
 }

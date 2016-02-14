@@ -1,0 +1,19 @@
+{	"extensionName": "Off-line Scratch to Mirto",
+	"extensionPort": 14275,
+	"blockSpecs": [
+
+		["w", "set motors speed left: %n right: %n", "setMotors", 0, 0],
+		["w", "stop motors", "stopMotors"],
+		["w", "play note freq. (Hz) %n time (ms) %n", "playNote", 440, 500],
+		["w", "clear LCD screen", "clearLCD"],	
+		["w", "write LCD line %n text %s", "writeLCDLine", 0, "Hello!"],
+		["b", "read left bumper", "readLeftBumper"],
+		["b", "read right bumper", "readRightBumper"],	
+		["r", "read infra-red sensor %m.ir", "readIR", 0],		
+		["r", "read potentiometer", "readPotentiometer"],
+		["b", "read button", "readButton"],
+	],
+	"menus": {
+		"ir": [0,1,2],
+	},
+}
