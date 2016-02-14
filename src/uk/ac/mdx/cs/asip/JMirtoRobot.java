@@ -42,7 +42,7 @@ public class JMirtoRobot {
 	// creates the serialPort object and the asip client.
 	// We then attach a listener to the serial port with SerialPortReader; this
 	// listener calls the aisp method to process input.
-	public JMirtoRobot(String port) {
+	public void initialize(String port) {
 	
 		serialPort = new SerialPort(port);
 
@@ -294,7 +294,8 @@ public class JMirtoRobot {
 	// A main method for testing
 	public static void main(String[] args) {
 		
-		JMirtoRobot robot = new JMirtoRobot("/dev/cu.usbmodem378561");
+		JMirtoRobot robot = new JMirtoRobot();
+		robot.initialize("/dev/cu.usbmodem378561");
 //		JMirtoRobot robot = new JMirtoRobot("/dev/ttyAMA0");
 
 		
@@ -341,25 +342,7 @@ public class JMirtoRobot {
 				robot.stopMotors();
 				Thread.sleep(500);
 			}
-/*			System.out.println("Setting motors to 50,50");
-			robot.setMotors(50, 50);
-			Thread.sleep(3000);
-			System.out.println("Stopping motors");
-			robot.stopMotors();
-			Thread.sleep(500);
-			System.out.println("Setting motors to 80,-80");
-			robot.setMotors(80, -80);
-			Thread.sleep(3000);
-			System.out.println("Stopping motors");
-			robot.stopMotors();
-			Thread.sleep(3000);
-			System.out.println("Setting motors to -100,100");
-			robot.setMotors(-100, 100);
-			Thread.sleep(3000);
-			System.out.println("Stopping motors");
-			robot.stopMotors();
-			System.out.println("All done, see you soon!");
-*/
+
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
