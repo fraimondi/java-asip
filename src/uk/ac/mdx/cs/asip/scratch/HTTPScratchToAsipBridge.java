@@ -26,7 +26,8 @@ public class HTTPScratchToAsipBridge implements Runnable {
 
 	public static final int HTTP_PORT = 14275;
 	
-	public static final String SERIAL_PORT = "/dev/tty.usbmodem1421";
+	// A default value (very unlikely to work...)
+	private String SERIAL_PORT;
 	
 	public static boolean DEBUG=true;
 	
@@ -35,7 +36,14 @@ public class HTTPScratchToAsipBridge implements Runnable {
 
     Date moDate = new Date();
 
-    SimpleSerialBoard board = new SimpleSerialBoard(SERIAL_PORT);
+    SimpleSerialBoard board;
+    
+    
+    public HTTPScratchToAsipBridge(String port) {
+    	this.SERIAL_PORT = port;   	
+    	System.out.println("Using port "+port);
+    	board = new SimpleSerialBoard(SERIAL_PORT);
+    }
     
 	@Override
 	public void run() {
@@ -198,7 +206,14 @@ public class HTTPScratchToAsipBridge implements Runnable {
   }
     
   public static void main (String[] args) {
-	  HTTPScratchToAsipBridge b = new HTTPScratchToAsipBridge();
+	  if ( args.length < 1 ) {
+		  System.err.println("Error: please provide a port name for Arduino");
+		  System.exit(1);
+	  }
+	  System.out.println("Starting the service...");
+	  String port = args[0];
+	  System.out.println("Using port "+port);
+	  HTTPScratchToAsipBridge b = new HTTPScratchToAsipBridge(port);
 	  b.run();
   }
     

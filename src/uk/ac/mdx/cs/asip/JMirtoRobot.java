@@ -3,13 +3,20 @@ package uk.ac.mdx.cs.asip;
 import uk.ac.mdx.cs.asip.services.BumpService;
 import uk.ac.mdx.cs.asip.services.EncoderService;
 import uk.ac.mdx.cs.asip.services.IRService;
+import uk.ac.mdx.cs.asip.services.LCDService;
 import uk.ac.mdx.cs.asip.services.MotorService;
+import uk.ac.mdx.cs.asip.services.ToneService;
 import jssc.SerialPort;
 import jssc.SerialPortEvent;
 import jssc.SerialPortEventListener;
 import jssc.SerialPortException;
 
 public class JMirtoRobot {
+	
+	// The 2015 mirto platform has a push button attached to pin 5
+	// and a pot attached to pin analog pin 7
+	static int PUSH_BUTTON_PIN = 5;
+	static int POT_PIN = 7;
 	
 	// For debugging
 	boolean DEBUG = false;
@@ -26,6 +33,8 @@ public class JMirtoRobot {
 	private EncoderService e0, e1;
 	private IRService ir0,ir1,ir2;
 	private BumpService b0,b1;
+	private ToneService ts0;
+	private LCDService lcd0;
 	
 	
 	
@@ -54,6 +63,13 @@ public class JMirtoRobot {
 			Thread.sleep(1500);
 			serialPort.addEventListener(new SerialPortReader());// Add
 				// SerialPortEventListener
+			Thread.sleep(200);
+			this.asip.requestPortMapping();
+			Thread.sleep(200);
+			this.asip.requestPortMapping();
+			Thread.sleep(200);
+			this.asip.requestPortMapping();
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -111,6 +127,20 @@ public class JMirtoRobot {
 		this.asip.addService('B', b1);
 		if (DEBUG) {
 			System.out.println("DEBUG: 2 bumper services added");
+		}
+		
+		// Adding tone service
+		ts0 = new ToneService(this.asip);
+		this.asip.addService('T', ts0);
+		if (DEBUG) {
+			System.out.println("DEBUG: tone service added");
+		}
+		
+		// Adding LCS service
+		lcd0 = new LCDService(this.asip);
+		this.asip.addService('L', lcd0);
+		if (DEBUG) {
+			System.out.println("DEBUG: LCD service added");
 		}
 		
 	}
@@ -179,6 +209,35 @@ public class JMirtoRobot {
 			return false;	
 		}			
 	}
+	
+	public void writeLCDLine(String message, int line) {
+		// A message up to 21 characters
+		// line number from 0 to 4
+		lcd0.setLine(message, line);
+	}
+	
+	public void clearLCDScreen() {
+		lcd0.clearLCD();
+	}
+	
+	public void playNote(int frequency, int duration) {
+		ts0.playNote(frequency,duration);
+	}
+	
+	public int getPotentiometer() {
+		// The 2015 Mirto platform has a pot attached to analog pin 7
+		return this.asip.analogRead(POT_PIN);
+	}
+	
+	public boolean getPushButton() {
+		// The 2015 Mirto platform has a push button attached to digital pin 5
+		if ( this.asip.digitalRead(PUSH_BUTTON_PIN) == 0 ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 
 	// As described above, SimpleSerialBoard writes messages to
 	// the serial port.
@@ -235,19 +294,41 @@ public class JMirtoRobot {
 	// A main method for testing
 	public static void main(String[] args) {
 		
-//		JMirtoRobot robot = new JMirtoRobot("/dev/tty.usbserial-A903VH1D");
-		JMirtoRobot robot = new JMirtoRobot("/dev/ttyAMA0");
+		JMirtoRobot robot = new JMirtoRobot("/dev/cu.usbmodem378561");
+//		JMirtoRobot robot = new JMirtoRobot("/dev/ttyAMA0");
 
 		
 		try {
 			Thread.sleep(500);
 			robot.setup();
 			Thread.sleep(500);	
+			robot.clearLCDScreen();
+			Thread.sleep(50);
+			robot.writeLCDLine("  Java Test Loop ", 0);
+			Thread.sleep(50);
+			robot.writeLCDLine("  Line 1 ", 1);
+			Thread.sleep(50);	
+			robot.writeLCDLine("  Line 2 ", 2);
+			Thread.sleep(50);		
+			robot.writeLCDLine("  Line 3 ", 3);
+			Thread.sleep(50);		
+			robot.writeLCDLine("  Line 4 ", 4);
+			Thread.sleep(50);		
+			
+			robot.playNote(262, 500);
+			Thread.sleep(500);
+			robot.playNote(294, 500);
+			Thread.sleep(500);
+			robot.playNote(330, 500);
+			Thread.sleep(500);
+			
 			while (true) {
 				System.out.println("IR: "+robot.getIR(0) + ","+robot.getIR(1)+","+robot.getIR(2));
 				System.out.println("Encoders: "+robot.getCount(0) + ","+robot.getCount(1));
 				System.out.println("Bumpers: "+robot.isPressed(0) + ","+robot.isPressed(1));
 				System.out.println("Setting motors to 50,50");
+				System.out.println("Pot value: "+robot.getPotentiometer());
+				System.out.println("Push button value: " + robot.getPushButton());
 				robot.setMotors(100, 0);
 				Thread.sleep(1500);
 				System.out.println("Stopping motors");

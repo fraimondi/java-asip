@@ -63,7 +63,7 @@ public class MotorService implements AsipService {
 		asip.getAsipWriter().write(serviceID+"," 
 									+ TAG_SET_MOTOR_SPEED+
 									"," + 
-									(this.motorID == 1? 0: 1) // swapping
+									this.motorID
 									+ "," + speed);
 	}
 	

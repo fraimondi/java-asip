@@ -11,11 +11,14 @@ package uk.ac.mdx.cs.asip.services;
 import uk.ac.mdx.cs.asip.AsipClient;
 import uk.ac.mdx.cs.asip.AsipWriter;
 
-// A service for servos. 
+// A service for Neopixels.
+
+// FIXME! This needs to be updated with the new protocol.
+// Please don't use for the time being.
 
 public class NeoPixelService implements AsipService {
 
-	private char serviceID = 'N';
+	private char serviceID = 'P';
 	
 	// A servo has a unique ID (there may be more than one servo
 	// attached, each one has a different servoID)

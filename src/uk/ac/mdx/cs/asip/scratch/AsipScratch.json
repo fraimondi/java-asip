@@ -6,7 +6,7 @@
 		[" ", "digital write pin %n %m.highLow", "digitalWrite", 13, "high"],
 		[" ", "analog write pin %n value %n", "analogWrite", 3, 255],
 		[" ", "servo write pin %n degrees %n", "servoWrite", 5, 180],
-		["b", "digital read pin %n", "digitalRead", 2],
+		["r", "digital read pin %n", "digitalRead", 2],
 		["r", "analog read pin %n", "analogRead", 0],
 	],
 	"menus": {
