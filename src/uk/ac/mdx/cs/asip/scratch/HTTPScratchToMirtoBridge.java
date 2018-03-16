@@ -174,7 +174,7 @@ public class HTTPScratchToMirtoBridge implements Runnable {
 		if (cmd.equals("setMotors")) {
 			// Making life easier here: I change the sign of the second motor at this point
 			// so that they don't have to worry about direction.
-			robot.setMotors(Integer.parseInt(parts[2]), - Integer.parseInt(parts[3]));
+			robot.setMotors(Integer.parseInt(parts[2]), Integer.parseInt(parts[3]));
 			if (DEBUG) {
 				System.out.println("Setting motors to "+parts[2]+ ","+parts[3]);
 			}
