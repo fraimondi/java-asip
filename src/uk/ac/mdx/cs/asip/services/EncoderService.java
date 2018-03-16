@@ -2,9 +2,17 @@ package uk.ac.mdx.cs.asip.services;
 
 import uk.ac.mdx.cs.asip.AsipClient;
 
+/*****
+ * 
+ * WARNING WARNING WARNING
+ * 
+ *
+ ********/
+
+
 public class EncoderService implements AsipService {
 	
-	private boolean DEBUG = false;
+	private boolean DEBUG = true;
 	
 	private char serviceID = 'E';
 	
@@ -48,8 +56,14 @@ public class EncoderService implements AsipService {
 	// Set the reporting time to t milliseconds
 	// (use t=0 to disable reporting)
 	// Notice that this will affect all encoders
+	// FIXME: for the new version of ASIP (2017) encoders can only be activated/
+	// deactivated with 0 or 1, reporting interval is fixed.
 	public void setReportingInterval(int t) {
-		this.asip.getAsipWriter().write(this.serviceID+","+AsipService.AUTOEVENT_REQUEST+","+t);
+		if ( t>0 ) {
+			this.asip.getAsipWriter().write(this.serviceID+","+AsipService.AUTOEVENT_REQUEST+",1");
+		} else {
+			this.asip.getAsipWriter().write(this.serviceID+","+AsipService.AUTOEVENT_REQUEST+",0");
+		}
 	}
 	
 	public void processResponse(String message) {

@@ -30,7 +30,6 @@ public class JMirtoRobot {
 	// The robot has 2 motors (wheels), 2 encoders, 3 IR sensors, 2 bump sensors
 	
 	private MotorService m0, m1;
-	private EncoderService e0, e1;
 	private IRService ir0,ir1,ir2;
 	private BumpService b0,b1;
 	private ToneService ts0;
@@ -91,17 +90,6 @@ public class JMirtoRobot {
 		this.asip.addService('M', m1);		
 		if (DEBUG) {
 			System.out.println("DEBUG: 2 motor services added");
-		}
-		
-		// Adding two encoders
-		e0 = new EncoderService(0, this.asip);
-		e1 = new EncoderService(1, this.asip);
-		e0.setReportingInterval(25);
-		e1.setReportingInterval(25);
-		this.asip.addService('E', e0);
-		this.asip.addService('E', e1);
-		if (DEBUG) {
-			System.out.println("DEBUG: 2 encoder services added");
 		}
 		
 		// Adding 3 IR sensors
@@ -185,10 +173,10 @@ public class JMirtoRobot {
 		switch (i) {
 
 		case 0: 
-			return e0.getCount();
+			return m0.getCount();
 			
 		case 1:
-			return e1.getCount();
+			return m1.getCount();
 
 		default: 
 			return -1;	
@@ -295,7 +283,7 @@ public class JMirtoRobot {
 	public static void main(String[] args) {
 		
 		JMirtoRobot robot = new JMirtoRobot();
-		robot.initialize("/dev/cu.usbmodem378561");
+		robot.initialize("/dev/cu.usbmodem3500851");
 //		JMirtoRobot robot = new JMirtoRobot("/dev/ttyAMA0");
 
 		
@@ -314,14 +302,17 @@ public class JMirtoRobot {
 			robot.writeLCDLine("  Line 3 ", 3);
 			Thread.sleep(50);		
 			robot.writeLCDLine("  Line 4 ", 4);
-			Thread.sleep(50);		
+			Thread.sleep(500);		
 			
+			System.out.println("Note 1:");
 			robot.playNote(262, 500);
-			Thread.sleep(500);
+			Thread.sleep(2000);
+			System.out.println("Note 2:");
 			robot.playNote(294, 500);
-			Thread.sleep(500);
+			Thread.sleep(2000);
+			System.out.println("Note 3:");
 			robot.playNote(330, 500);
-			Thread.sleep(500);
+			Thread.sleep(2500);
 			
 			while (true) {
 				System.out.println("IR: "+robot.getIR(0) + ","+robot.getIR(1)+","+robot.getIR(2));
@@ -330,13 +321,13 @@ public class JMirtoRobot {
 				System.out.println("Setting motors to 50,50");
 				System.out.println("Pot value: "+robot.getPotentiometer());
 				System.out.println("Push button value: " + robot.getPushButton());
-				robot.setMotors(100, 0);
+				robot.setMotors(100, 100);
 				Thread.sleep(1500);
 				System.out.println("Stopping motors");
 				robot.stopMotors();
 				Thread.sleep(500);
 				System.out.println("Setting motors to 100,100");
-				robot.setMotors(0,-250);
+				robot.setMotors(-250,-250);
 				Thread.sleep(1500);
 				System.out.println("Stopping motors");
 				robot.stopMotors();

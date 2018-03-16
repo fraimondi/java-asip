@@ -37,7 +37,7 @@ public class ToneService implements AsipService {
 	
 	// This method sends the message to play a tone (in Hz) for a certain duration (in ms)
 	public void playNote(int frequency, int duration) {
-		asip.getAsipWriter().write(serviceID+","+"P"+","+frequency+","+duration);
+		asip.getAsipWriter().write(serviceID+","+"P"+","+frequency+","+duration+"\n");
 	}
 
 }

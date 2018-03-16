@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Random;
 
 import uk.ac.mdx.cs.asip.tcpclient.SimpleTCPAsipListener;
 import uk.ac.mdx.cs.asip.tcpclient.SimpleTCPWriter;
@@ -62,10 +63,10 @@ public class JMirtoRobotOverTCP extends JMirtoRobot {
 
 
 	// A main method for testing
-/*	public static void main(String[] args) {
+	public static void main(String[] args) {
 		
 		JMirtoRobotOverTCP robot = new JMirtoRobotOverTCP();
-		robot.initialize("192.168.0.119");
+		robot.initialize("192.168.42.1");
 	
 		
 		try {
@@ -92,24 +93,27 @@ public class JMirtoRobotOverTCP extends JMirtoRobot {
 			robot.playNote(330, 500);
 			Thread.sleep(500);
 			
+			robot.setMotors(150,-150);
 			while (true) {
-				System.out.println("IR: "+robot.getIR(0) + ","+robot.getIR(1)+","+robot.getIR(2));
-				System.out.println("Encoders: "+robot.getCount(0) + ","+robot.getCount(1));
-				System.out.println("Bumpers: "+robot.isPressed(0) + ","+robot.isPressed(1));
-				System.out.println("Setting motors to 50,50");
-				System.out.println("Pot value: "+robot.getPotentiometer());
-				System.out.println("Push button value: " + robot.getPushButton());
-				robot.setMotors(100, 0);
-				Thread.sleep(1500);
-				System.out.println("Stopping motors");
-				robot.stopMotors();
-				Thread.sleep(500);
-				System.out.println("Setting motors to 100,100");
-				robot.setMotors(0,-250);
-				Thread.sleep(1500);
-				System.out.println("Stopping motors");
-				robot.stopMotors();
-				Thread.sleep(500);
+				if (robot.isPressed(0) || robot.isPressed(1)  || (robot.getIR(1)>250)) {
+					robot.stopMotors();
+					Thread.sleep(10);
+					robot.setMotors(-100,100);
+					Thread.sleep(500);
+					robot.stopMotors();
+					Random rand = new Random();
+					int rotationDuration = rand.nextInt(400);
+					if ( rand.nextInt(2) == 1 ) {
+						robot.setMotors(100, 100);
+					} else {
+						robot.setMotors(-100,-100);
+					}
+					Thread.sleep(200+rotationDuration);
+					robot.stopMotors();
+					Thread.sleep(10);
+					robot.setMotors(150, -150);					
+				}
+				Thread.sleep(5);
 			}
 
 		} catch (InterruptedException e) {
@@ -117,6 +121,6 @@ public class JMirtoRobotOverTCP extends JMirtoRobot {
 		}
 		
 	} 
-	*/
+	
 
 }

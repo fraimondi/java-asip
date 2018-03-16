@@ -1,0 +1,44 @@
+1) Set up the Raspberry Pi 3 as an access point:
+
+# apt-get update
+# apt-get upgrade
+
+# apt-get install dnsmasq hostapd
+
+# sudo systemctl stop dnsmasq
+# sudo systemctl stop hostapd
+
+Edit /etc/dhcpcd.conf and add at the end:
+interface wlan0
+    static ip_address=192.168.42.1/24
+
+# service dhcpcd restart
+
+Replace /etc/dnsmasq.conf with the following content only:
+interface=wlan0      
+  dhcp-range=192.168.42.100,192.168.42.200,255.255.255.0,24h
+
+Create /etc/hostapd/hostapd.conf with the following content:
+interface=wlan0
+driver=nl80211
+ssid=NewMirtoBot14
+hw_mode=g
+channel=7
+wmm_enabled=0
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+wpa_passphrase=Concorde
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+
+Edit /etc/default/hostapd and change the line to point to the config file:
+DAEMON_CONF="/etc/hostapd/hostapd.conf"
+
+Restart everything with:
+sudo systemctl start hostapd
+sudo systemctl start dnsmasq
+
+Reboot and make sure everything works
