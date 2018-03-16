@@ -1,3 +1,8 @@
+You will need to configure the Raspberry Pi as an access point (point 1);
+Then, clone java-asip and launch the service on the Pi (point 2)
+Finally, export the java-asip project as a jar and launch the bridge (point 3)
+
+**************************
 1) Set up the Raspberry Pi 3 as an access point:
 
 # apt-get update
@@ -42,3 +47,23 @@ sudo systemctl start hostapd
 sudo systemctl start dnsmasq
 
 Reboot and make sure everything works
+
+**************
+
+2) Clone java-asip and start the TCP to serial bridge:
+
+$ git clone https://github.com/fraimondi/java-asip
+$ cd src
+$ javac -classpath ../lib/jssc-2.8.0.jar    uk/ac/mdx/cs/asip/tcpclient/SimpleAsipTCPSerialBridge.java
+$ java -classpath ../lib/jssc-2.8.0.jar:./ uk.ac.mdx.cs.asip.tcpclient.SimpleAsipTCPSerialBridge /dev/ttyS0
+
+
+***************
+
+3) Open java-asip in Eclipse and export it as a jar file (runnable jar file) with launch configuration 
+HTTPScratchToMirtoBridge (or simply grab the relevant class files).
+Launch the bridge with:
+$ java -jar scratch-mirto-bridge.jar 192.168.42.1
+Finally, download Scratch 2 (off-line version). Import an experimental
+extension by pressing SHIFT and then click on the File menu.
+Select MirtoScratch.json for the new blocks
