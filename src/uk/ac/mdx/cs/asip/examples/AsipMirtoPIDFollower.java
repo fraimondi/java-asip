@@ -21,7 +21,7 @@ public class AsipMirtoPIDFollower {
 		return howTo;
 	}
 	
-	public void getHowTo(String s) {
+	public void setHowTo(String s) {
 		this.howTo = s;
 	}
 	
